@@ -281,7 +281,7 @@ class ADXL372 {
 
     int fifo_ctrl(fifo_mode_t mode, fifo_format_t format = FIFO_XYZ, uint16_t samples_to_trigger = 0x80) {
         write(ADXL372_FIFO_SAMPLES, samples_to_trigger & 0xFF);
-        write(ADXL372_FIFO_CTL, (samples_to_trigger & 1) | (mode << 1) | (format << 3));
+        write(ADXL372_FIFO_CTL, ((samples_to_trigger >> 8) & 0x01) | (mode << 1) | (format << 3));
         return 0;
     }
 
